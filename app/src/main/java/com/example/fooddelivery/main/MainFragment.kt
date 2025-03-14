@@ -53,7 +53,7 @@ class MainFragment : Fragment() {
             adapterFilters.updateListFilters(it)
         }
         viewModel.selectedFilter.observe(viewLifecycleOwner) {
-
+            adapterFilters.updateSelectedFilters(it)
         }
     }
 }

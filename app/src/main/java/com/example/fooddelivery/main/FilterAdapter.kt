@@ -29,12 +29,6 @@ class FilterAdapter(private val onClick: (FilterResponse) -> Unit) :
 
         holder.bind(item, isSelected)
         holder.itemView.setOnClickListener {
-            selectedFilter = if (item in selectedFilter) {
-                selectedFilter - item
-            } else {
-                selectedFilter + item
-            }
-            notifyDataSetChanged()
             onClick(item)
         }
     }

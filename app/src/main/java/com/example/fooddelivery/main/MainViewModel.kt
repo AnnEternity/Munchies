@@ -21,8 +21,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val filters: LiveData<List<FilterResponse>>
         get() = _filters
 
-    private val _selectedFilter = MutableLiveData<List<FilterResponse?>>()
-    val selectedFilter: LiveData<List<FilterResponse?>>
+    private val _selectedFilter = MutableLiveData<List<FilterResponse>>()
+    val selectedFilter: LiveData<List<FilterResponse>>
         get() = _selectedFilter
 
     private val _filteredRestaurants = MutableLiveData<List<RestaurantsData>>()
@@ -50,7 +50,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getRestaurantsBySelectedFilter(filter: FilterResponse) {
         val currentFilters = _selectedFilter.value ?: emptyList()
 
-        val newList: List<FilterResponse?> = if (currentFilters.contains(filter)) {
+        val newList: List<FilterResponse> = if (currentFilters.contains(filter)) {
             currentFilters - filter
         } else {
             currentFilters + filter
