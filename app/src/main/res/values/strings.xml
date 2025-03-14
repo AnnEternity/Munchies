@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FoodDelivery</string>
+    <string name="logo">Logo</string>
+    <string name="filter_image">Filter image</string>
+    <string name="rating">%.1f</string>
+    <string name="delivery_time">%d min</string>
+    <string name="open">Open</string>
+    <string name="closed">Closed</string>
+    <string name="unknown">Unknown</string>
+</resources>

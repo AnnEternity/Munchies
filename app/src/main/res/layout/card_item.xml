@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="restaurantCard"
+            type="com.example.fooddelivery.network.RestaurantsData" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="343dp"
+        android:layout_height="196dp"
+        android:layout_marginBottom="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="8dp" />
+
+            <ImageView
+                android:id="@+id/restaurant_card_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                android:contentDescription="Restaurant card image"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/banner_image_test" />
+
+            <TextView
+                android:id="@+id/restaurant_name_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:text="@{restaurantCard.name}"
+                android:textAppearance="@style/TextAppearance.title1"
+                app:layout_constraintEnd_toStartOf="@id/star_image_view"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/restaurant_card_image_view"
+                tools:text="Restaurants name That is really long too much" />
+
+            <ImageView
+                android:id="@+id/star_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/star_icon"
+                app:layout_constraintBottom_toBottomOf="@id/rating_text_view"
+                app:layout_constraintEnd_toStartOf="@id/rating_text_view"
+                app:layout_constraintTop_toTopOf="@id/rating_text_view" />
+
+            <TextView
+                android:id="@+id/rating_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/rating(restaurantCard.rating)}"
+                android:textAppearance="@style/TextAppearance.rating"
+                app:layout_constraintBaseline_toBaselineOf="@id/restaurant_name_text_view"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintTop_toBottomOf="@id/restaurant_card_image_view"
+                tools:text="3.8" />
+
+            <TextView
+                android:id="@+id/filters_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.subtitle1"
+                android:textColor="@color/Subtitle"
+                app:layout_constraintBottom_toTopOf="@id/delivery_time_text_view"
+                app:layout_constraintEnd_toStartOf="@id/guideline_right"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/restaurant_name_text_view"
+                tools:text="Take-Out and a lot of others filters more than I can create here" />
+
+            <ImageView
+                android:id="@+id/clock_image_view"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@drawable/clock_icon"
+                app:layout_constraintBottom_toBottomOf="@id/delivery_time_text_view"
+                app:layout_constraintEnd_toStartOf="@id/delivery_time_text_view"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/delivery_time_text_view" />
+
+            <TextView
+                android:id="@+id/delivery_time_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:includeFontPadding="false"
+                android:text="@{@string/delivery_time(restaurantCard.deliveryTimeMinutes)}"
+                android:textAppearance="@style/TextAppearance.footer1"
+                android:textColor="@color/DarkText"
+                app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/clock_image_view"
+                tools:text="1 min" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
