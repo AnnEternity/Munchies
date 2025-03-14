@@ -10,8 +10,7 @@ class FilterAdapter(private val onClick: (FilterResponse) -> Unit) :
     RecyclerView.Adapter<FiltersViewHolder>() {
 
     private var listFilter = emptyList<FilterResponse>()
-    private var selectedFilter: FilterResponse? = null
-
+    private var selectedFilter = emptyList<FilterResponse>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FiltersViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -21,32 +20,34 @@ class FilterAdapter(private val onClick: (FilterResponse) -> Unit) :
     }
 
     override fun getItemCount(): Int {
-       return listFilter.size
+        return listFilter.size
     }
-
 
     override fun onBindViewHolder(holder: FiltersViewHolder, position: Int) {
         val item = listFilter[position]
-        val isSelected = selectedFilter == item
+        val isSelected = item in selectedFilter
 
         holder.bind(item, isSelected)
         holder.itemView.setOnClickListener {
-            if (selectedFilter == item) {
-                selectedFilter = null
+            selectedFilter = if (item in selectedFilter) {
+                selectedFilter - item
             } else {
-                selectedFilter = item
+                selectedFilter + item
             }
             notifyDataSetChanged()
             onClick(item)
         }
     }
 
-    fun updateListFilters (newList: List<FilterResponse>){
-        listFilter = newList
+    fun updateSelectedFilters(newList: List<FilterResponse>) {
+        selectedFilter = newList
         notifyDataSetChanged()
     }
 
-
+    fun updateListFilters(newList: List<FilterResponse>) {
+        listFilter = newList
+        notifyDataSetChanged()
+    }
 
 
 }

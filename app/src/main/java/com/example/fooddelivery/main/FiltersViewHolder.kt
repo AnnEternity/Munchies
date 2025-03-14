@@ -10,22 +10,22 @@ import com.example.fooddelivery.network.FilterResponse
 
 
 class FiltersViewHolder(
-    private val filterItem: FilterItemBinding,
+    private val binding: FilterItemBinding,
     private val onClick: (FilterResponse) -> Unit
-) : RecyclerView.ViewHolder(filterItem.root)
+) : RecyclerView.ViewHolder(binding.root)
 {
     fun bind(item: FilterResponse, isSelected: Boolean) {
-        filterItem.filterCard = item
-        filterItem.filterImageView.load(item.url)
-        filterItem.root.setOnClickListener {
+        binding.filterCard = item
+        binding.filterImageView.load(item.url)
+        binding.root.setOnClickListener {
             onClick(item)
         }
         if (isSelected){
-            filterItem.cardViewFilter.setCardBackgroundColor(ContextCompat.getColor(filterItem.root.context, R.color.Selected))
-            filterItem.filterTextView.setTextColor(Color.WHITE)
+            binding.cardViewFilter.setCardBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.Selected))
+            binding.filterTextView.setTextColor(Color.WHITE)
         }else{
-            filterItem.cardViewFilter.setCardBackgroundColor(Color.WHITE)
-            filterItem.filterTextView.setTextColor(Color.BLACK)
+            binding.cardViewFilter.setCardBackgroundColor(Color.WHITE)
+            binding.filterTextView.setTextColor(Color.BLACK)
         }
     }
 }

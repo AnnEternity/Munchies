@@ -21,7 +21,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val filters: LiveData<List<FilterResponse>>
         get() = _filters
 
-    private val _selectedFilter = MutableLiveData<FilterResponse?>()
+    private val _selectedFilter = MutableLiveData<List<FilterResponse?>>()
+    val selectedFilter: LiveData<List<FilterResponse?>>
+        get() = _selectedFilter
 
     private val _filteredRestaurants = MutableLiveData<List<RestaurantsData>>()
     val filteredRestaurants: LiveData<List<RestaurantsData>>
@@ -39,18 +41,30 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 _filteredRestaurants.value = _restaurants.value
                 _filters.value = filtersAndRestaurants.filters
             } catch (e: Exception) {
-                Toast.makeText(getApplication(), "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(getApplication(), "Network error: ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
 
     fun getRestaurantsBySelectedFilter(filter: FilterResponse) {
-        if (_selectedFilter.value == filter) {
-            _selectedFilter.value = null
-            _filteredRestaurants.value = _restaurants.value
+        val currentFilters = _selectedFilter.value ?: emptyList()
+
+        val newList: List<FilterResponse?> = if (currentFilters.contains(filter)) {
+            currentFilters - filter
         } else {
-            _selectedFilter.value = filter
-            _filteredRestaurants.value = _restaurants.value?.filter { it.filters.contains(filter) }
+            currentFilters + filter
+        }
+        _selectedFilter.value = newList
+
+        _filteredRestaurants.value = if (newList.isEmpty()) {
+            _restaurants.value
+        } else {
+            _restaurants.value?.filter { restaurant ->
+                newList.all { filter ->
+                    restaurant.filters.contains(filter)
+                }
+            }
         }
     }
 }

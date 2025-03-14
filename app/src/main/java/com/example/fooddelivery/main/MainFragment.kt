@@ -38,7 +38,8 @@ class MainFragment : Fragment() {
         binding.restaurantsRecyclerView.adapter = adapterRestaurant
         binding.restaurantsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.filterRecyclerView.adapter = adapterFilters
-        binding.filterRecyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
+        binding.filterRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         return binding.root
     }
@@ -48,8 +49,11 @@ class MainFragment : Fragment() {
         viewModel.filteredRestaurants.observe(viewLifecycleOwner) {
             adapterRestaurant.updateListRestaurants(it)
         }
-        viewModel.filters.observe(viewLifecycleOwner){
+        viewModel.filters.observe(viewLifecycleOwner) {
             adapterFilters.updateListFilters(it)
+        }
+        viewModel.selectedFilter.observe(viewLifecycleOwner) {
+
         }
     }
 }
