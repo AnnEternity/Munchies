@@ -38,7 +38,6 @@ class DetailFragment : Fragment() {
 
                 false -> {
                     getString(R.string.closed)
-
                 }
 
                 else -> {
@@ -53,7 +52,6 @@ class DetailFragment : Fragment() {
 
                     false -> {
                         ContextCompat.getColor(requireContext(), R.color.Negative)
-
                     }
 
                     else -> {
@@ -67,9 +65,7 @@ class DetailFragment : Fragment() {
         binding.bannerImage.load(args.restaurant.imageUrl)
 
         binding.chevronImage.setOnClickListener {
-            findNavController().navigate(
-                DetailFragmentDirections.actionDetailFragmentToMainFragment()
-            )
+            findNavController().navigateUp()
         }
 
     }
